@@ -11,7 +11,7 @@ mv catalogue-main catalogue
 cd /home/roboshop/catalogue
 npm install
 
-sed -i -e 's/MONGO_DNSNAME/mongodb.sarbjeet310.online/' systemd.service
+sed -i -e 's/MONGO_DNSNAME/mongodb.devops69.online/' systemd.service
 
 mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
 systemctl daemon-reload
