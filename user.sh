@@ -11,7 +11,7 @@ mv user-main user
 cd /home/roboshop/user
 npm install
 
-sed -i -e 's/REDIS_ENDPOINT/edis.devops69.online/' -e 's/MONGO_ENDPOINT/mongo.devops69.online/'
+sed -i -e 's/REDIS_ENDPOINT/edis.devops69.online/' -e 's/MONGO_ENDPOINT/mongo.devops69.online/' systemd.service
 systemctl daemon-reload
 systemctl restart user
 systemctl enable user
