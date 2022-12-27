@@ -4,7 +4,7 @@ if [ -z "$1" ]; then
   exit
 fi
 
-Roboshop_mysql_password=$1
+Roboshop_MYSQL_password=$1
 
 #this stat function will check if $1 is equal to 1 then its true otherwise its false. $1 means first argument
 STAT() {
@@ -13,7 +13,7 @@ STAT() {
 else
     echo FAILURE
     exit
-fi
+ fi
 }
 
 echo -e "\e[32mDownloading MySQL Repo File\e[0m" # to add color to heading
@@ -24,22 +24,22 @@ STAT [? #Stat question mark means exit status on the curl command . that stat fu
 echo -e "\e[32mdisable MYSQL 8 version repo\e[0m"
 #echo disable MYSQL 8 version repo
 dnf module disable mysql -y
-STAT [?
+STAT $?
 
 echo -e "\e[32mInstall MYSQL\e[0m" # to add color to heading
 #echo Install MYSQL // to display message
 yum install mysql-community-server -y
-STAT [?
+STAT $?
 
 echo -e "\e[32menable MYSQL\e[0m"
 #echo enable MYSQL
 systemctl enable mysqld
-STAT [?
+STAT $?
 
 echo -e "\e[32mrestart MYSQL\e[0m"
 #echo restart MYSQL
 systemctl restart mysqld
-STAT [?
+STAT $?
 
 echo show databases | mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD}
 if [ $? -ne 0 ] #if $? is not equal to 0 , commands will only get executed if condition is true . when our condition is true when Roboshop@1 is not set. suppose if you execute the query and output is 1 that means password is not reset
