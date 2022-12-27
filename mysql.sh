@@ -1,5 +1,5 @@
 echo -e "\e[32mDownloading MySQL Repo File\e[0m"
-echo Downloading MYSQL Repo File
+#echo Downloading MYSQL Repo File
 curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
 if [ $? -ne 0 ]; then
     echo SUCCESS
@@ -8,7 +8,7 @@ else
 fi
 
 echo -e "\e[32mdisable MYSQL 8 version repo\e[0m"
-echo disable MYSQL 8 version repo
+#echo disable MYSQL 8 version repo
 dnf module disable mysql -y
 if [ $? -ne 0 ]; then
     echo SUCCESS
