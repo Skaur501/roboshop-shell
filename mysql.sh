@@ -8,7 +8,7 @@ ROBOSHOP_MYSQL_PASSWORD=$1
 
 #this stat function will check if $1 is equal to 1 then its true otherwise its false. $1 means first argument
 STAT() {
-  if [ $1 -ne 0 ]; then
+  if [ $1 -eq 0 ]; then
     echo SUCCESS
 else
     echo FAILURE
