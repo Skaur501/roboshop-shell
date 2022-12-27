@@ -19,7 +19,7 @@ else
 echo -e "\e[32mDownloading MySQL Repo File\e[0m" # to add color to heading
 #echo Downloading MYSQL Repo File
 curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
-STAT [? #Stat question mark means exit status on the curl command . that stat function will go to the first argument
+STAT $? #Stat question mark means exit status on the curl command . that stat function will go to the first argument
 
 echo -e "\e[32mdisable MYSQL 8 version repo\e[0m"
 #echo disable MYSQL 8 version repo
