@@ -1,4 +1,4 @@
-echo -e "\e[32mDownloading MySQL Repo File\e[0m"
+echo -e "\e[32mDownloading MySQL Repo File\e[0m" # to add color to heading
 #echo Downloading MYSQL Repo File
 curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
 if [ $? -eq 0 ]; then
@@ -16,8 +16,8 @@ else
     echo FAILURE
 fi
 
-echo -e "\e[32mInstall MYSQL\e[0m"
-#echo Install MYSQL
+echo -e "\e[32mInstall MYSQL\e[0m" # to add color to heading
+#echo Install MYSQL // to display message
 yum install mysql-community-server -y
 if [ $? -eq 0 ] ; then
     echo SUCCESS
