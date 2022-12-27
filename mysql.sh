@@ -9,7 +9,7 @@ Roboshop_mysql_password=$1
 #this stat function will check if $1 is equal to 1 then its true otherwise its false. $1 means first argument
 STAT() {
   if [ $1 -eq 0 ]; then
-    eco SUCCESS
+    echo SUCCESS
 else
     echo FAILURE
     exit
