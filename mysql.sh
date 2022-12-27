@@ -1,3 +1,10 @@
+if [ -z "$1" ]; then
+  echo Input argument Password is needed
+  exit
+fi
+
+Roboshop_mysql_password=$1
+
 echo -e "\e[32mDownloading MySQL Repo File\e[0m" # to add color to heading
 #echo Downloading MYSQL Repo File
 curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
