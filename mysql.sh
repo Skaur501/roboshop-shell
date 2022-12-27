@@ -1,7 +1,7 @@
 echo -e "\e[32mDownloading MySQL Repo File\e[0m"
 #echo Downloading MYSQL Repo File
 curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
-if [ $? -ne 0 ]; then
+if [ $? -eq 0 ]; then
     echo SUCCESS
 else
     echo FAILURE
