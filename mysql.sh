@@ -7,6 +7,7 @@ else
     echo FAILURE
 fi
 
+echo -e "\e[32mdisable MYSQL 8 version repo\e[0m"
 echo disable MYSQL 8 version repo
 dnf module disable mysql -y
 if [ $? -ne 0 ]; then
