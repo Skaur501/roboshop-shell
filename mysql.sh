@@ -16,28 +16,27 @@ else
  fi
 }
 
-echo -e "\e[32mDownloading MySQL Repo File\e[0m" # to add color to heading
-#echo Downloading MYSQL Repo File
+PRINT() {
+  echo -e "\e[32m$1\e[0m"
+}
+
+PRINT "Downloading MYSQL Repo File"
 curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
 STAT $? #Stat question mark means exit status on the curl command . that stat function will go to the first argument
 
-echo -e "\e[32mdisable MYSQL 8 version repo\e[0m"
-#echo disable MYSQL 8 version repo
+PRINT "Disable MYSQL 8 version repo"
 dnf module disable mysql -y
 STAT $?
 
-echo -e "\e[32mInstall MYSQL\e[0m" # to add color to heading
-#echo Install MYSQL // to display message
+PRINT "Install mysql server"
 yum install mysql-community-server -y
 STAT $?
 
-echo -e "\e[32menable MYSQL\e[0m"
-#echo enable MYSQL
+PRINT "Enable mysqld"
 systemctl enable mysqld
 STAT $?
 
-echo -e "\e[32mrestart MYSQL\e[0m"
-#echo restart MYSQL
+PRINT "Restart mysqld"
 systemctl restart mysqld
 STAT $?
 
