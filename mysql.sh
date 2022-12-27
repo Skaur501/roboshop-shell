@@ -5,6 +5,7 @@ if [ $? -eq 0 ]; then
     echo SUCCESS
 else
     echo FAILURE
+    exit
 fi
 
 echo -e "\e[32mdisable MYSQL 8 version repo\e[0m"
@@ -14,6 +15,7 @@ if [ $? -eq 0 ]; then
     echo SUCCESS
 else
     echo FAILURE
+    exit
 fi
 
 echo -e "\e[32mInstall MYSQL\e[0m" # to add color to heading
@@ -23,6 +25,7 @@ if [ $? -eq 0 ] ; then
     echo SUCCESS
 else
     echo FAILURE
+    exit
 fi
 
 echo -e "\e[32menable MYSQL\e[0m"
@@ -32,6 +35,7 @@ if [ $? -eq 0 ]; then
     echo SUCCESS
 else
     echo FAILURE
+    exit
 fi
 
 echo -e "\e[32mrestart MYSQL\e[0m"
@@ -41,6 +45,7 @@ if [ $? -eq 0 ]; then
     echo SUCCESS
 else
     echo FAILURE
+    exit
 fi
 
 echo show databases | mysql -uroot -pRoboshop@1
