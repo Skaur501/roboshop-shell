@@ -1,4 +1,4 @@
-# -z is going to be true if the value 1 is empty
+# -z is going to be true if the value 1 is empty otherwise it will be false
 if [ -z "$1" ]; then
   echo Input argument Password is needed
   exit
