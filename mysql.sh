@@ -1,7 +1,7 @@
-echo -e "\[33mDownloading MySQL Repo File\e[0m"
+echo -e "\e[33mDownloading MySQL Repo File\e[0m"
 echo Downloading MYSQL Repo File
 curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
-if [ $? -ne 0]; then
+if [ $? -ne 0 ]; then
     echo SUCCESS
 else
     echo FAILURE
@@ -9,7 +9,7 @@ fi
 
 echo disable MYSQL 8 version repo
 dnf module disable mysql -y
-if [ $? -ne 0]; then
+if [ $? -ne 0 ]; then
     echo SUCCESS
 else
     echo FAILURE
@@ -17,7 +17,7 @@ fi
 
 echo Install MYSQL
 yum install mysql-community-server -y
-if [ $? -ne 0]; then
+if [ $? -ne 0 ] ; then
     echo SUCCESS
 else
     echo FAILURE
@@ -25,7 +25,7 @@ fi
 
 echo enable MYSQL
 systemctl enable mysqld
-if [ $? -ne 0]; then
+if [ $? -ne 0 ]; then
     echo SUCCESS
 else
     echo FAILURE
@@ -33,7 +33,7 @@ fi
 
 echo restart MYSQL
 systemctl restart mysqld
-if [ $? -ne 0]; then
+if [ $? -ne 0 ]; then
     echo SUCCESS
 else
     echo FAILURE
