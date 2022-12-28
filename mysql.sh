@@ -45,7 +45,7 @@ STAT $?
 echo show databases | mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD}
 if [ $? -ne 0 ] #if $? is not equal to 0 , commands will only get executed if condition is true . when our condition is true when RoboShop@1 is not set. suppose if you execute the query and output is 1 that means password is not reset
 then
-  echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${ROBOSHOP_MYSQL_PASSWORD}';" > /tmp/root-pass-sql &>>$LOG
+  echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '-p${ROBOSHOP_MYSQL_PASSWORD}';" > /tmp/root-pass-sql &>>$LOG
   DEFAULT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')
   cat /tmp/root-pass-sql | mysql --connect-expired-password -uroot -p"${DEFAULT_PASSWORD}" &>>$LOG
 fi
