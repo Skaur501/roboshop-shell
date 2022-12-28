@@ -20,7 +20,6 @@ DOWNLOAD_APP_CODE() {
 
     PRINT "Remove previous version of app"
     cd $APP_LOC &>>$LOG
-    STAT $?
     rm -rf ${CONTENT} &>>$LOG
     STAT $?
 
@@ -30,7 +29,7 @@ DOWNLOAD_APP_CODE() {
 }
 
 NODEJS() {
-  APP_LOC= cd /home/roboshop
+  APP_LOC= /home/roboshop
   CONTENT=$COMPONENT
   PRINT "Download Nodejs Repo"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOG
@@ -51,6 +50,9 @@ NODEJS() {
 
   PRINT "Rename folder"
   mv $COMPONENT-main $COMPONENT
+  STAT $?
+
+  PRINT "Go to Path $COMPONENT"
   cd $COMPONENT &>>$LOG
   STAT $?
 
