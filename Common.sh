@@ -18,17 +18,16 @@ DOWNLOAD_APP_CODE() {
     curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/roboshop-devops-project/$COMPONENT/archive/main.zip" &>>$LOG
     STAT $?
 
-    PRINT "GO TO PATH"
+    PRINT "Remove previous version of app"
     cd $APP_LOC &>>$LOG
     STAT $?
-
-    PRINT "Remove previous version of app"
     rm -rf ${CONTENT} &>>$LOG
     STAT $?
-}
 
-LOG=/tmp/$COMPONENT.log
-rm -f $LOG
+    PRINT "Unzip Folder"
+    unzip -o /tmp/$COMPONENT.zip &>>$LOG
+    STAT $?
+}
 
 NODEJS() {
   APP_LOC= cd /home/roboshop
@@ -50,8 +49,10 @@ NODEJS() {
 
   DOWNLOAD_APP_CODE
 
+  PRINT "Rename folder"
   mv $COMPONENT-main $COMPONENT
   cd $COMPONENT &>>$LOG
+  STAT $?
 
   PRINT "Install NPM"
   npm install &>>$LOG
