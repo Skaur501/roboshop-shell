@@ -12,7 +12,12 @@ DOWNLOAD_APP_CODE #DOWNLOADING APP CODE IS GOING TO THE LOCATON AND DOWNLOADING 
 exit
 
 mv frontend-main/static/* .
-mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf
 
-systemctl enable nginx
-systemctl start nginx
+PRINT "COPY CONFIGURATION FILE"
+mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf &>>$LOG
+
+PRINT "Enable Service nginx"
+systemctl enable nginx &>>$LOG
+
+PRINT "Restart service nginx"
+systemctl restart nginx &>>$LOG
