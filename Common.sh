@@ -21,7 +21,7 @@ DOWNLOAD_APP_CODE() {
 
     PRINT "Remove previous version of app"
     cd $APP_LOC &>>$LOG
-    rm -rf ${CONTENT} &>>$LOG
+    rm -f ${CONTENT} &>>$LOG
     STAT $?
 
     PRINT "Unzip Folder"
