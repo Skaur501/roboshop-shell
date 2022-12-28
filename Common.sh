@@ -78,5 +78,6 @@ NODEJS() {
 
   PRINT "Enable Cart"
   systemctl enable cart &>>$LOG
-  STAT $?  }
+  STAT $?
+}
 
