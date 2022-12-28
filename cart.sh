@@ -2,7 +2,7 @@ Source Common.sh
 
 PRINT "Download Nodejs Repo"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
-STAT$?
+STAT $?
 
 PRINT "install node js"
 yum install nodejs -y
