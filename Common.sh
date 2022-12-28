@@ -33,7 +33,7 @@ NODEJS() {
   STAT $?
 
   PRINT "Download Zip folder"
-  curl -s -L -o /tmp/cart.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>>$LOG
+  curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>$LOG
   STAT $?
 
   PRINT "GO TO PATH"
@@ -41,19 +41,19 @@ NODEJS() {
   STAT $?
 
   PRINT "Remove previous version of app"
-  rm -rf cart &>>$LOG
+  rm -rf ${COMPONENT} &>>$LOG
   STAT $?
 
   PRINT "Unzip Folder"
-  unzip /tmp/cart.zip &>>$LOG
+  unzip /tmp/${COMPONENT}.zip &>>$LOG
   STAT $?
 
   PRINT "Rename folder"
-  mv cart-main cart &>>$LOG
+  mv ${COMPONENT}-main ${COMPONENT} &>>$LOG
   STAT $?
 
   PRINT "Go to Path cart"
-  cd cart &>>$LOG
+  cd ${COMPONENT} &>>$LOG
   STAT $?
 
   PRINT "Install NPM"
@@ -65,7 +65,7 @@ NODEJS() {
   STAT $?
 
   PRINT "Configure systemd file"
-  mv /home/roboshop/cart/systemd.service /etc/systemd/system/cart.service &>>$LOG
+  mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service &>>$LOG
   STAT $?
 
   PRINT "Daemon-Reload"
@@ -73,11 +73,11 @@ NODEJS() {
   STAT $?
 
   PRINT "Restart Cart"
-  systemctl restart cart &>>$LOG
+  systemctl restart ${COMPONENT} &>>$LOG
   STAT $?
 
   PRINT "Enable Cart"
-  systemctl enable cart &>>$LOG
+  systemctl enable ${COMPONENT} &>>$LOG
   STAT $?
 }
 
