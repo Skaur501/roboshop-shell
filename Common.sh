@@ -50,12 +50,8 @@ NODEJS() {
 
   DOWNLOAD_APP_CODE
 
-  PRINT "Unzip Folder"
-  unzip /tmp/$COMPONENT.zip &>>$LOG
-  STAT $?
-
   PRINT "Rename folder"
-  mv $COMPONENT-main $COMPONENT &>>$LOG
+  mv $COMPONENT-main $COMPONENT
   STAT $?
 
   PRINT "Go to Path $COMPONENT"
@@ -67,7 +63,7 @@ NODEJS() {
   STAT $?
 
   PRINT "Configure Redis endpoint and catalogue endpoint"
-  sed -i -e 's/REDIS_ENDPOINT/redis.devops69.online/' -e 's/CATALOGUE_ENDPOINT/caTalogue.devops69.online/' /home/roboshop/$COMPONENT/systemd.service &>>$LOG
+  sed -i -e 's/REDIS_ENDPOINT/redis.devops69.online/' -e 's/CATALOGUE_ENDPOINT/catalogue.devops69.online/' /home/roboshop/$COMPONENT/systemd.service &>>$LOG
   STAT $?
 
   PRINT "Configure systemd file"
