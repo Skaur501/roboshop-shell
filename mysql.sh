@@ -56,3 +56,13 @@ if [ $? -ne 0 ]; then
   echo "uninstall plugins validate password" | mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} &>>$LOG
 fi
 STAT $?
+
+APP_LOC=/tmp
+CONTENT=mysql-main
+DOWNLOAD_APP_CODE
+
+cd mysql-main &>>$LOG
+
+PRINT "Load shipping schema"
+mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} &>>$LOG
+STAT $?
