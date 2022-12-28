@@ -48,6 +48,8 @@ NODEJS() {
   fi
   STAT $?
 
+  DOWNLOAD_APP_CODE
+
   PRINT "Unzip Folder"
   unzip /tmp/$COMPONENT.zip &>>$LOG
   STAT $?
