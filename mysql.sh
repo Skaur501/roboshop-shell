@@ -64,5 +64,5 @@ DOWNLOAD_APP_CODE
 cd mysql-main &>>$LOG
 
 PRINT "Load shipping schema"
-mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} &>>$LOG
+mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} <shipping.sql &>>$LOG
 STAT $?
