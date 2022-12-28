@@ -6,6 +6,7 @@ fi
 
 COMPONENT=mysql
 source Common.sh
+
 ROBOSHOP_MYSQL_PASSWORD=$1
 
 #this stat function will check if $1 is equal to 1 then its true otherwise its false. $1 means first argument
