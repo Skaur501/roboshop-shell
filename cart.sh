@@ -10,7 +10,10 @@ yum install nodejs -y &>>$LOG
 STAT $?
 
 PRINT "ROBOSHOP USER"
-useradd roboshop &>>$LOG
+id roboshop &>>$LOG
+ if [ $? -ne 0 ]; then
+ useradd roboshop &>>$LOG
+fi
 STAT $?
 
 PRINT "Download Zip folder"
