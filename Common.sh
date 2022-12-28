@@ -53,7 +53,7 @@ NODEJS() {
   mv ${COMPONENT}-main ${COMPONENT} &>>$LOG
   STAT $?
 
-  PRINT "Go to Path ${COMPONENT}"
+  PRINT "Go to Path"
   cd ${COMPONENT} &>>$LOG
   STAT $?
 
@@ -73,11 +73,11 @@ NODEJS() {
   systemctl daemon-reload &>>$LOG
   STAT $?
 
-  PRINT "Restart ${COMPONENT}"
+  PRINT "Restart"
   systemctl restart ${COMPONENT} &>>$LOG
   STAT $?
 
-  PRINT "Enable ${COMPONENT}"
+  PRINT "Enable"
   systemctl enable ${COMPONENT} &>>$LOG
   STAT $?
 }
