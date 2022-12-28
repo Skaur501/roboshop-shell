@@ -1,4 +1,4 @@
-Source Common.sh
+Source common.sh
 
 PRINT "Download Nodejs Repo"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
