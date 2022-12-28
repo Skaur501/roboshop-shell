@@ -1,4 +1,4 @@
-Component=user
+COMPONENT=user
 source Common.sh
 
 NODEJS #CALLED A FUNction from common.sh 

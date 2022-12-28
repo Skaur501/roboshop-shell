@@ -13,7 +13,7 @@ PRINT()
   echo -e "\e[32m$1\e[0m"
 }
 
-LOG=/tmp/$Component.log
+LOG=/tmp/$COMPONENT.log
 rm -f $LOG
 
 NODEJS() {
@@ -33,7 +33,7 @@ NODEJS() {
   STAT $?
 
   PRINT "Download Zip folder"
-  curl -s -L -o /tmp/${Component}.zip "https://github.com/roboshop-devops-project/${Component}/archive/main.zip" &>>$LOG
+  curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>$LOG
   STAT $?
 
   PRINT "GO TO PATH"
@@ -41,19 +41,19 @@ NODEJS() {
   STAT $?
 
   PRINT "Remove previous version of app"
-  rm -rf ${Component} &>>$LOG
+  rm -rf ${COMPONENT} &>>$LOG
   STAT $?
 
   PRINT "Unzip Folder"
-  unzip /tmp/${Component}.zip &>>$LOG
+  unzip /tmp/${COMPONENT}.zip &>>$LOG
   STAT $?
 
   PRINT "Rename folder"
-  mv ${Component}-main ${Component} &>>$LOG
+  mv ${COMPONENT}-main ${COMPONENT} &>>$LOG
   STAT $?
 
-  PRINT "Go to Path cart"
-  cd ${Component} &>>$LOG
+  PRINT "Go to Path ${COMPONENT}"
+  cd ${COMPONENT} &>>$LOG
   STAT $?
 
   PRINT "Install NPM"
@@ -61,23 +61,23 @@ NODEJS() {
   STAT $?
 
   PRINT "Configure Redis endpoint and catalogue endpoint"
-  sed -i -e 's/REDIS_ENDPOINT/redis.devops69.online/' -e 's/CATALOGUE_ENDPOINT/catalogue.devops69.online/' /home/roboshop/cart/systemd.service &>>$LOG
+  sed -i -e 's/REDIS_ENDPOINT/redis.devops69.online/' -e 's/CATALOGUE_ENDPOINT/caralogue.devops69.online/' /home/roboshop/${COMPONENT}/systemd.service &>>$LOG
   STAT $?
 
   PRINT "Configure systemd file"
-  mv /home/roboshop/cart/systemd.service /etc/systemd/system/${Component}.service &>>$LOG
+  mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service &>>$LOG
   STAT $?
 
   PRINT "Daemon-Reload"
   systemctl daemon-reload &>>$LOG
   STAT $?
 
-  PRINT "Restart Cart"
-  systemctl restart cart &>>$LOG
+  PRINT "Restart ${COMPONENT}"
+  systemctl restart ${COMPONENT} &>>$LOG
   STAT $?
 
-  PRINT "Enable Cart"
-  systemctl enable cart &>>$LOG
+  PRINT "Enable ${COMPONENT}"
+  systemctl enable ${COMPONENT} &>>$LOG
   STAT $?
 }
 
