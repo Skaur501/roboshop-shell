@@ -29,7 +29,7 @@ DOWNLOAD_APP_CODE() {
 }
 
 NODEJS() {
-  APP_LOC= /home/roboshop
+  APP_LOC=/home/roboshop
   CONTENT=$COMPONENT
   PRINT "Download Nodejs Repo"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOG
