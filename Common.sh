@@ -50,17 +50,8 @@ NODEJS() {
 
   DOWNLOAD_APP_CODE
 
-  PRINT "Unzip Folder"
-  unzip /tmp/$COMPONENT.zip &>>$LOG
-  STAT $?
-
-  PRINT "Rename folder"
   mv $COMPONENT-main $COMPONENT
-  STAT $?
-
-  PRINT "Go to Path $COMPONENT"
   cd $COMPONENT &>>$LOG
-  STAT $?
 
   PRINT "Install NPM"
   npm install &>>$LOG
