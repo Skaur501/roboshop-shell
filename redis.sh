@@ -1,3 +1,6 @@
+COMPONENT=redis
+source Common.sh
+
 PRINT "Install rpm package"
 dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y &>>$LOG
 
