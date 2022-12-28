@@ -31,7 +31,7 @@ LOG=/tmp/$COMPONENT.log
 rm -f $LOG
 
 NODEJS() {
-  APP_LOC= /home/roboshop
+  APP_LOC= cd /home/roboshop
   CONTENT=$COMPONENT
   PRINT "Download Nodejs Repo"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOG
