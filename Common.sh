@@ -14,24 +14,27 @@ PRINT()
   echo -e "\e[32m$1\e[0m"
 }
 
+LOG=/tmp/$COMPONENT.log
+rm -f $LOG
+
 DOWNLOAD_APP_CODE() {
-    PRINT "Download Zip folder"
-    curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>$LOG
+    PRINT "Download app component"
+    curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/roboshop-devops-project/$COMPONENT/archive/main.zip" &>>$LOG
     STAT $?
 
     PRINT "Remove previous version of app"
     cd $APP_LOC &>>$LOG
-    rm -f ${CONTENT} &>>$LOG
+    rm -rf ${CONTENT} &>>$LOG
     STAT $?
 
     PRINT "Unzip Folder"
-    unzip -o /tmp/${COMPONENT}.zip &>>$LOG
+    unzip -o /tmp/$COMPONENT.zip &>>$LOG
     STAT $?
 }
 
 NODEJS() {
   APP_LOC=/home/roboshop
-  CONTENT=${COMPONENT}
+  CONTENT=$COMPONENT
   PRINT "Download Nodejs Repo"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOG
   STAT $?
@@ -50,11 +53,11 @@ NODEJS() {
   DOWNLOAD_APP_CODE
 
   PRINT "Rename folder"
-  mv ${COMPONENT}-main ${COMPONENT} &>>$LOG
+  mv $COMPONENT-main $COMPONENT &>>$LOG
   STAT $?
 
   PRINT "Go to Path"
-  cd ${COMPONENT} &>>$LOG
+  cd $COMPONENT &>>$LOG
   STAT $?
 
   PRINT "Install NPM"
@@ -62,11 +65,11 @@ NODEJS() {
   STAT $?
 
   PRINT "Configure Redis endpoint and catalogue endpoint"
-  sed -i -e 's/REDIS_ENDPOINT/redis.devops69.online/' -e 's/CATALOGUE_ENDPOINT/caralogue.devops69.online/' /home/roboshop/${COMPONENT}/systemd.service &>>$LOG
+  sed -i -e 's/REDIS_ENDPOINT/redis.devops69.online/' -e 's/CATALOGUE_ENDPOINT/caralogue.devops69.online/' /home/roboshop/$COMPONENT/systemd.service &>>$LOG
   STAT $?
 
   PRINT "Configure systemd file"
-  mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service &>>$LOG
+  mv /home/roboshop/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service &>>$LOG
   STAT $?
 
   PRINT "Daemon-Reload"
@@ -74,11 +77,11 @@ NODEJS() {
   STAT $?
 
   PRINT "Restart"
-  systemctl restart ${COMPONENT} &>>$LOG
+  systemctl restart $COMPONENT &>>$LOG
   STAT $?
 
   PRINT "Enable"
-  systemctl enable ${COMPONENT} &>>$LOG
+  systemctl enable $COMPONENT &>>$LOG
   STAT $?
 }
 
