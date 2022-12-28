@@ -4,6 +4,7 @@ STAT() {
   else
     echo -e "\e[31mFAILURE\e[0m"
     echo Check the error in $LOG File
+    exit
  fi
 }
 
@@ -49,7 +50,7 @@ NODEJS() {
   DOWNLOAD_APP_CODE
 
   PRINT "Rename folder"
-  mv ${COMPONENT}-main ${COMPONENT}
+  mv ${COMPONENT}-main ${COMPONENT} &>>$LOG
   STAT $?
 
   PRINT "Go to Path ${COMPONENT}"
