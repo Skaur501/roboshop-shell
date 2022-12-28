@@ -50,6 +50,10 @@ NODEJS() {
 
   DOWNLOAD_APP_CODE
 
+  PRINT "Unzip Folder"
+  unzip /tmp/$COMPONENT.zip &>>$LOG
+  STAT $?
+
   PRINT "Rename folder"
   mv $COMPONENT-main $COMPONENT
   STAT $?
