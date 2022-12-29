@@ -79,6 +79,7 @@ NODEJS() {
 JAVA() {
     APP_LOC=/home/roboshop
     CONTENT=$COMPONENT
+
     PRINT "Install Maven"
     yum install maven -y &>>$LOG
     STAT $?
