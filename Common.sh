@@ -96,10 +96,6 @@ NODEJS() {
   npm install &>>$LOG
   STAT $?
 
-  PRINT "Configure Redis endpoint and catalogue endpoint"
-  sed -i -e 's/REDIS_ENDPOINT/redis.devops69.online/' -e 's/CATALOGUE_ENDPOINT/catalogue.devops69.online/' /home/roboshop/$COMPONENT/systemd.service &>>$LOG
-  STAT $?
-
   SYSTEMD_SETUP
 }
 
