@@ -12,11 +12,11 @@ create_ec2() {
   PRIVATE_IP=$(aws ec2 run-instances \
       --image-id ${AMI_ID} \
       --instance-type t3.micro \
-      --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}]"  \ "ResourceType=spot-instances-request,Tags=[{Key=Name,Value=${COMPONENT}}]"
+      --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}" "ResourceType=spot-instances-request,Tags=[{Key=Name,Value=${COMPONENT}}]"  \
       --instance-market-options "MarketType=spot,SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}"\
       --security-group-ids ${SGID} \
       | jq '.Instances[].PrivateIpAddress' | sed -e 's/"//g')
-exit
+
   sed -e "s/IPADDRESS/${PRIVATE_IP}/" -e "s/COMPONENT/${COMPONENT}/" route53.json >/tmp/record.json
   aws route53 change-resource-record-sets --hosted-zone-id ${ZONE_ID} --change-batch file:///tmp/record.json | jq
 }
@@ -36,10 +36,9 @@ if [ -z "${SGID}" ]; then
 fi
 
 
-COMPONENT="${1}"
-if [ -z "${COMPONENT}" ]; then
-  echo "Input component name is needed"
-  exit 1
-fi
+for component in catalogue cart user shipping payment frontend mongodb mysql rabbitmq redis dispatch; do
+  COMPONENT="${component}-${env}"
+  create_ec2
+done
 
-create_ec2
+
