@@ -28,7 +28,7 @@ DOWNLOAD_APP_CODE() {
   fi
 
     PRINT "Download app component"
-    curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/roboshop-devops-project/$COMPONENT/archive/main.zip" &>>$LOG
+    curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>$LOG
     STAT $?
 
     PRINT "Remove previous version of app"
@@ -37,7 +37,7 @@ DOWNLOAD_APP_CODE() {
     STAT $?
 
     PRINT "Unzip Folder"
-    unzip -o /tmp/$COMPONENT.zip &>>$LOG
+    unzip -o /tmp/${COMPONENT}.zip &>>$LOG
     STAT $?
 
     SYSTEMD_SETUP
@@ -45,8 +45,8 @@ DOWNLOAD_APP_CODE() {
 
 SYSTEMD_SETUP() {
   PRINT "Configure Endpoints for systemd file"
-  sed -i -e 's/REDIS_ENDPOINT/redis.devops69.online/' -e 's/CATALOGUE_ENDPOINT/catalogue.devops69.online/' /home/roboshop/$COMPONENT/systemd.service &>>$LOG
-  mv /home/roboshop/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service &>>$LOG
+  sed -i -e 's/REDIS_ENDPOINT/redis.devops69.online/' -e 's/CATALOGUE_ENDPOINT/catalogue.devops69.online/' /home/roboshop/${COMPONENT}/systemd.service &>>$LOG
+  mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service &>>$LOG
   STAT $?
 
   PRINT "Daemon-Reload systemd"
@@ -54,17 +54,17 @@ SYSTEMD_SETUP() {
   STAT $?
 
   PRINT "Restart"
-  systemctl restart $COMPONENT &>>$LOG
+  systemctl restart ${COMPONENT} &>>$LOG
   STAT $?
 
   PRINT "Enable"
-  systemctl enable $COMPONENT &>>$LOG
+  systemctl enable ${COMPONENT} &>>$LOG
   STAT $?
 }
 
 NODEJS() {
   APP_LOC=/home/roboshop
-  CONTENT=$COMPONENT
+  CONTENT=${COMPONENT}
   APP_USER=roboshop
 
   PRINT "Download Nodejs Repo"
@@ -85,11 +85,11 @@ NODEJS() {
   DOWNLOAD_APP_CODE
 
   PRINT "Rename folder"
-  mv $COMPONENT-main $COMPONENT &>>$LOG
+  mv ${COMPONENT}-main ${COMPONENT} &>>$LOG
   STAT $?
 
   PRINT "Go to Path"
-  cd $COMPONENT &>>$LOG
+  cd ${COMPONENT} &>>$LOG
   STAT $?
 
   PRINT "Install NPM"
@@ -101,7 +101,7 @@ NODEJS() {
 
 JAVA() {
     APP_LOC=/home/roboshop
-    CONTENT=$COMPONENT
+    CONTENT=${COMPONENT}
     APP_USER=roboshop
 
     PRINT "Install Maven"
@@ -111,7 +111,7 @@ JAVA() {
     DOWNLOAD_APP_CODE
 
     PRINT "Download Maven Dependencies"
-    mvn clean package &>>$LOG &&  mv target/$COMPONENT-1.0.jar $COMPONENT.jar &>>$LOG
+    mvn clean package &>>$LOG &&  mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar &>>$LOG
     STAT $?
 
     SYSTEMD_SETUP
