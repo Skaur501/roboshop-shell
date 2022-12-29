@@ -40,6 +40,10 @@ DOWNLOAD_APP_CODE() {
     unzip -o /tmp/${COMPONENT}.zip &>>$LOG
     STAT $?
 
+    PRINT "Move shipping to main"
+    mv shipping-main shipping &>>$LOG
+    STAT $?
+
     SYSTEMD_SETUP
 }
 
