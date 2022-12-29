@@ -35,21 +35,21 @@ DOWNLOAD_APP_CODE() {
 }
 
 SYSTEMD_SETUP() {
-      PRINT "Move path"
-      mv /home/roboshop/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service &>>$LOG
-      STAT $?
+  PRINT "Configure Endpoints for systemd file"
+  mv /home/roboshop/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service &>>$LOG
+  STAT $?
 
-      PRINT " Reload Daemon"
-      systemctl daemon-reload &>>$LOG
-      STAT $?
+  PRINT "Daemon-Reload systemd"
+  systemctl daemon-reload &>>$LOG
+  STAT $?
 
-      PRINT " Start $COMPONENT service"
-      systemctl start $COMPONENT  &>>$LOG
-      STAT $?
+  PRINT "Restart"
+  systemctl restart $COMPONENT &>>$LOG
+  STAT $?
 
-      PRINT "Enable $COMPONENT service"
-      systemctl enable $COMPONENT &>>$LOG
-      STAT $?
+  PRINT "Enable"
+  systemctl enable $COMPONENT &>>$LOG
+  STAT $?
 }
 
 NODEJS() {
@@ -63,14 +63,29 @@ NODEJS() {
   yum install nodejs -y &>>$LOG
   STAT $?
 
+  PRINT "ROBOSHOP USER"
+  id roboshop &>>$LOG
+   if [ $? -ne 0 ]; then
+   useradd roboshop &>>$LOG
+  fi
+  STAT $?
+
   DOWNLOAD_APP_CODE
 
+  PRINT "Rename folder"
   mv $COMPONENT-main $COMPONENT &>>$LOG
+  STAT $?
+
+  PRINT "Go to Path"
   cd $COMPONENT &>>$LOG
   STAT $?
 
-  PRINT "Install Ddependies for nodejs"
+  PRINT "Install NPM"
   npm install &>>$LOG
+  STAT $?
+
+  PRINT "Configure Redis endpoint and catalogue endpoint"
+  sed -i -e 's/REDIS_ENDPOINT/redis.devops69.online/' -e 's/CATALOGUE_ENDPOINT/caralogue.devops69.online/' /home/roboshop/$COMPONENT/systemd.service &>>$LOG
   STAT $?
 
   SYSTEMD_SETUP
@@ -79,6 +94,7 @@ NODEJS() {
 JAVA() {
     APP_LOC=/home/roboshop
     CONTENT=$COMPONENT
+    APP_USER=roboshop
 
     PRINT "Install Maven"
     yum install maven -y &>>$LOG
