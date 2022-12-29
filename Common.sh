@@ -30,6 +30,26 @@ DOWNLOAD_APP_CODE() {
     PRINT "Unzip Folder"
     unzip -o /tmp/$COMPONENT.zip &>>$LOG
     STAT $?
+
+    SYSTEMD_SETUP
+}
+
+SYSTEMD_SETUP() {
+      PRINT "Move path"
+      mv /home/roboshop/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service &>>$LOG
+      STAT $?
+
+      PRINT " Reload Daemon"
+      systemctl daemon-reload &>>$LOG
+      STAT $?
+
+      PRINT " Start $COMPONENT service"
+      systemctl start $COMPONENT  &>>$LOG
+      STAT $?
+
+      PRINT "Enable $COMPONENT service"
+      systemctl enable $COMPONENT &>>$LOG
+      STAT $?
 }
 
 NODEJS() {
@@ -43,45 +63,34 @@ NODEJS() {
   yum install nodejs -y &>>$LOG
   STAT $?
 
-  PRINT "ROBOSHOP USER"
-  id roboshop &>>$LOG
-   if [ $? -ne 0 ]; then
-   useradd roboshop &>>$LOG
-  fi
-  STAT $?
-
   DOWNLOAD_APP_CODE
 
-  PRINT "Rename folder"
   mv $COMPONENT-main $COMPONENT &>>$LOG
-  STAT $?
-
-  PRINT "Go to Path"
   cd $COMPONENT &>>$LOG
   STAT $?
 
-  PRINT "Install NPM"
+  PRINT "Install Ddependies for nodejs"
   npm install &>>$LOG
   STAT $?
 
-  PRINT "Configure Redis endpoint and catalogue endpoint"
-  sed -i -e 's/REDIS_ENDPOINT/redis.devops69.online/' -e 's/CATALOGUE_ENDPOINT/caralogue.devops69.online/' /home/roboshop/$COMPONENT/systemd.service &>>$LOG
-  STAT $?
-
-  PRINT "Configure systemd file"
-  mv /home/roboshop/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service &>>$LOG
-  STAT $?
-
-  PRINT "Daemon-Reload"
-  systemctl daemon-reload &>>$LOG
-  STAT $?
-
-  PRINT "Restart"
-  systemctl restart $COMPONENT &>>$LOG
-  STAT $?
-
-  PRINT "Enable"
-  systemctl enable $COMPONENT &>>$LOG
-  STAT $?
+  SYSTEMD_SETUP
 }
+
+JAVA() {
+    APP_LOC=/home/roboshop
+    CONTENT=$COMPONENT
+    PRINT "Install Maven"
+    yum install maven -y &>>$LOG
+    STAT $?
+
+    DOWNLOAD_APP_CODE
+
+    PRINT "Download Maven Dependencies"
+    mvn clean package &>>$LOG &&  mv target/$COMPONENT-1.0.jar $COMPONENT.jar &>>$LOG
+    STAT $?
+
+    SYSTEMD_SETUP
+}
+
+
 
