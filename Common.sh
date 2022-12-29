@@ -115,7 +115,7 @@ JAVA() {
     DOWNLOAD_APP_CODE
 
     PRINT "Download Maven Dependencies"
-    mvn clean package &>>$LOG
+    mvn -f clean package &>>$LOG
     STAT $?
 
     PRINT "Download target component"
