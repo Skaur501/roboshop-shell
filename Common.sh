@@ -40,7 +40,7 @@ DOWNLOAD_APP_CODE() {
     unzip -o /tmp/${COMPONENT}.zip &>>$LOG
     STAT $?
 
-    SYSTEMD_SETUP
+    #SYSTEMD_SETUP
 }
 
 SYSTEMD_SETUP() {
