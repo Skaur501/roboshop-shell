@@ -64,6 +64,8 @@ SYSTEMD_SETUP() {
 NODEJS() {
   APP_LOC=/home/roboshop
   CONTENT=$COMPONENT
+  APP_USER=roboshop
+
   PRINT "Download Nodejs Repo"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOG
   STAT $?
