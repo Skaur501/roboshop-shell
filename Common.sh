@@ -41,7 +41,7 @@ DOWNLOAD_APP_CODE() {
     STAT $?
 
     PRINT "Move shipping to main"
-    mv shipping-main shipping &>>$LOG
+    mv $COMPONENT-main COMPONENT &>>$LOG
     STAT $?
 
     SYSTEMD_SETUP
