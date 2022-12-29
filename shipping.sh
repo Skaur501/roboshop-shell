@@ -3,3 +3,5 @@ COMPONENT=shipping
 source Common.sh
 
 JAVA
+
+SYSTEMD_SETUP
