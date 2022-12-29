@@ -18,6 +18,15 @@ LOG=/tmp/$COMPONENT.log
 rm -f $LOG
 
 DOWNLOAD_APP_CODE() {
+  if [ ! -z "$APP_USER" ]; then
+    PRINT "adding application USER"
+    id roboshop &>>$LOG
+  if [ $? -ne 0 ]; then
+    useradd roboshop &>>$LOG
+  fi
+    STAT $?
+  fi
+
     PRINT "Download app component"
     curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/roboshop-devops-project/$COMPONENT/archive/main.zip" &>>$LOG
     STAT $?
