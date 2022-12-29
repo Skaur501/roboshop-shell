@@ -41,7 +41,7 @@ DOWNLOAD_APP_CODE() {
     STAT $?
 
     PRINT "Move shipping to main"
-    mv $COMPONENT-main COMPONENT &>>$LOG
+    mv ${COMPONENT}-main ${COMPONENT} &>>$LOG
     STAT $?
 
     SYSTEMD_SETUP
@@ -105,7 +105,7 @@ NODEJS() {
 
 JAVA() {
     APP_LOC=/home/roboshop
-    CONTENT=$COMPONENT
+    CONTENT=${COMPONENT}
     APP_USER=roboshop
 
     PRINT "Install Maven"
@@ -119,7 +119,7 @@ JAVA() {
     STAT $?
 
     PRINT "Download target component"
-    mv target/$COMPONENT-1.0.jar $COMPONENT.jar &>>$LOG
+    mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar &>>$LOG
     STAT $?
 
     SYSTEMD_SETUP
