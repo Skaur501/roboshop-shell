@@ -21,7 +21,6 @@ create_ec2() {
   aws route53 change-resource-record-sets --hosted-zone-id ${ZONE_ID} --change-batch file:///tmp/record.json | jq
 }
 
-exit
 ## Main Program
 AMI_ID=$(aws ec2 describe-images --filters "Name=name,Values=Centos-8-DevOps-Practice" | jq '.Images[].ImageId' | sed -e 's/"//g')
 if [ -z "${AMI_ID}" ]; then
@@ -37,7 +36,7 @@ fi
 
 
 for component in catalogue cart user shipping payment frontend mongodb mysql rabbitmq redis dispatch; do
-  COMPONENT="${component}-${env}"
+  COMPONENT="${env}-${COMPONENT}"
   create_ec2
 done
 
