@@ -40,12 +40,6 @@ DOWNLOAD_APP_CODE() {
     PRINT "Unzip Folder"
     unzip -o /tmp/${COMPONENT}.zip &>>$LOG
     STAT $?
-
-    PRINT "Move shipping to main"
-    mv ${COMPONENT}-main ${COMPONENT} &>>$LOG
-    STAT $?
-
-    SYSTEMD_SETUP
 }
 
 SYSTEMD_SETUP() {
@@ -89,9 +83,8 @@ NODEJS() {
 
   DOWNLOAD_APP_CODE
 
-  #PRINT "Rename folder"
-  #mv ${COMPONENT}-main ${COMPONENT}
-  #cd ${COMPONENT}
+  mv ${COMPONENT}-main ${COMPONENT}
+  cd ${COMPONENT}
 
   PRINT "Install NPM"
   npm install &>>$LOG
