@@ -16,6 +16,7 @@ PRINT()
 
 LOG=/tmp/$COMPONENT.log
 rm -f $LOG
+#set-hostname -skip-apply $COMPONENT
 
 DOWNLOAD_APP_CODE() {
   if [ ! -z "$APP_USER" ]; then
@@ -49,7 +50,7 @@ DOWNLOAD_APP_CODE() {
 
 SYSTEMD_SETUP() {
   PRINT "Configure Endpoints for systemd file"
-  sed -i -e 's/REDIS_ENDPOINT/redis.devops69.online/' -e 's/CATALOGUE_ENDPOINT/caralogue.devops69.online/' /home/roboshop/${COMPONENT}/systemd.service &>>$LOG
+  sed -i -e 's/REDIS_ENDPOINT/redis.sarbjeet310.online/' -e 's/CATALOGUE_ENDPOINT/caralogue.sarbjeet310.online/' /home/roboshop/${COMPONENT}/systemd.service &>>$LOG
   mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service &>>$LOG
   STAT $?
 
