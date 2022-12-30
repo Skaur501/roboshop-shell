@@ -89,9 +89,9 @@ NODEJS() {
 
   DOWNLOAD_APP_CODE
 
-  PRINT "Rename folder"
-  mv ${COMPONENT}-main ${COMPONENT}
-  cd ${COMPONENT}
+  #PRINT "Rename folder"
+  #mv ${COMPONENT}-main ${COMPONENT}
+  #cd ${COMPONENT}
 
   PRINT "Install NPM"
   npm install &>>$LOG
