@@ -135,12 +135,15 @@ PYTHON() {
 
     PRINT " Reload daemon"
     systemctl daemon-reload &>>$LOG
+    STAT $?
 
     PRINT "Enable Payment"
     systemctl enable payment &>>$LOG
+    STAT $?
 
     PRINT "Restart payment"
     systemctl restart payment &>>$LOG
+    STAT $?
 }
 
 
