@@ -1,13 +1,14 @@
 #!/bin/bash
 
 ##### Change these values ###
-ZONE_ID="Z0863736QOU102FOZCW5"
-SG_NAME="allow-all"
+ZONE_ID="Z0863736QOU102FOZCW5" # we get zone-id from route 53 hosted zones
+SG_NAME="allow-all" # security grup name
 #ENV="dev"
 #############################
 
-env=dev
+env=dev # env setup
 
+#ec2 configurtion
 create_ec2() {
   PRIVATE_IP=$(aws ec2 run-instances \
       --image-id ${AMI_ID} \
