@@ -119,7 +119,7 @@ PYTHON() {
     CONTENT=${COMPONENT}
     APP_USER=roboshop
 
-    Print "Install python"
+    PRINT "Install python"
     yum install python36 gcc python3-devel -y &>>$LOG
 
     DOWNLOAD_APP_CODE
