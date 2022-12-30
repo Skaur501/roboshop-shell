@@ -50,8 +50,8 @@ DOWNLOAD_APP_CODE() {
 
 SYSTEMD_SETUP() {
   PRINT "Configure Endpoints for systemd file"
-  sed -i -e 's/REDIS_ENDPOINT/dev-redis.sarbjeet310.online/' -e 's/CATALOGUE_ENDPOINT/dev-catalogue.sarbjeet310.online/' -e 's/USERHOST/dev-user.sarbjeet310.online/' /home/roboshop/${COMPONENT}/systemd.service &>>$LOG
-  mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service &>>$LOG
+  sed -i -e 's/REDIS_ENDPOINT/dev-redis.sarbjeet310.online/' -e 's/CATALOGUE_ENDPOINT/catalogue.sarbjeet310.online/' -e 's/USERHOST/user.sarbjeet310.online/' /home/roboshop/${COMPONENT}/systemd.service &>>$LOG
+  mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service
   STAT $?
 
   PRINT "Daemon-Reload systemd"
@@ -91,7 +91,7 @@ NODEJS() {
 
   PRINT "Rename folder"
   mv ${COMPONENT}-main ${COMPONENT}
-   cd ${COMPONENT}
+  cd ${COMPONENT}
 
   PRINT "Install NPM"
   npm install &>>$LOG
