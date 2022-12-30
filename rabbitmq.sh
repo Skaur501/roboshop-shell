@@ -1,5 +1,11 @@
 COMPONENT=rabbitmq
 source Common.sh
+RABBITMQ_APP_USER_PASSWORD=$1
+
+if [ -z "$1" ]; then #if $1 is emplty
+  echo "Input password is empty"
+  exit
+fi
 
 PRINT " Install repo for erlang"
 curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash &>>$LOG
@@ -25,11 +31,11 @@ PRINT "reStart Rabbitmq"
 systemctl restart rabbitmq-server &>>$LOG
 STAT $?
 
-PRINT "Add user"
-rabbitmqctl add_user roboshop roboshop123 &>>$LOG
+PRINT "Add application user"
+rabbitmqctl add_user roboshop ${RABBITMQ_APP_USER_PASSWORD} &>>$LOG
 STAT $?
 
-PRINT "Set user tags"
+PRINT "cONFIGURE APPLICATION USER TAG"
 rabbitmqctl set_user_tags roboshop administrator &>>$LOG
 STAT $?
 
