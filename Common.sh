@@ -114,5 +114,34 @@ JAVA() {
     SYSTEMD_SETUP
 }
 
+PYTHON() {
+    APP_LOC=/home/roboshop
+    CONTENT=${COMPONENT}
+    APP_USER=roboshop
+
+    Print "Install python"
+    yum install python36 gcc python3-devel -y &>>$LOG
+
+    DOWNLOAD_APP_CODE
+
+    PRINT "Rename componentain to component"
+    mv ${COMPONENT}-main ${COMPONENT} &>>$LOG
+    cd ${COMPONENT}
+    STAT $?
+
+    PRINT "Install requirements"
+    pip3 install -r requirements.txt &>>$LOG
+    STAT $?
+
+    PRINT " Reload daemon"
+    systemctl daemon-reload &>>$LOG
+
+    PRINT "Enable Payment"
+    systemctl enable payment &>>$LOG
+
+    PRINT "Restart payment"
+    systemctl restart payment &>>$LOG
+}
+
 
 

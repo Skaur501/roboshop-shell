@@ -35,7 +35,7 @@ PRINT "Add application user"
 rabbitmqctl add_user roboshop ${RABBITMQ_APP_USER_PASSWORD} &>>$LOG
 STAT $?
 
-PRINT "cONFIGURE APPLICATION USER TAG"
+PRINT "CONFIGURE APPLICATION USER TAG"
 rabbitmqctl set_user_tags roboshop administrator &>>$LOG
 STAT $?
 
