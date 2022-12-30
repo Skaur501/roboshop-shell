@@ -50,7 +50,7 @@ DOWNLOAD_APP_CODE() {
 
 SYSTEMD_SETUP() {
   PRINT "Configure Endpoints for systemd file"
-  sed -i -e 's/REDIS_ENDPOINT/dev-redis.sarbjeet310.online/' -e 's/CATALOGUE_ENDPOINT/catalogue.sarbjeet310.online/' -e 's/USERHOST/user.sarbjeet310.online/' -e 's/USERHOST/dev-payment.sarbjeet310.online/' /home/roboshop/${COMPONENT}/systemd.service &>>$LOG
+  sed -i -e 's/REDIS_ENDPOINT/redis.sarbjeet310.online/' -e 's/CATALOGUE_ENDPOINT/catalogue.sarbjeet310.online/' -e 's/USERHOST/user.sarbjeet310.online/' -e 's/USERHOST/dev-payment.sarbjeet310.online/' /home/roboshop/${COMPONENT}/systemd.service &>>$LOG
   mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service
   STAT $?
 
