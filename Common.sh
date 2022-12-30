@@ -104,13 +104,12 @@ JAVA() {
 
     DOWNLOAD_APP_CODE
 
-    PRINT "Download Maven Dependencies"
-    mvn clean package &>>$LOG
-    STAT $?
+    mv ${COMPONENT}-main ${COMPONENT}
+    cd ${COMPONENT}
 
-    PRINT "Download target component"
-    mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar &>>$LOG
-    STAT $?
+   PRINT "Download Maven Dependencies"
+   mvn clean package &>>$LOG  && mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar &>>$LOG
+   STAT $?
 
     SYSTEMD_SETUP
 }
