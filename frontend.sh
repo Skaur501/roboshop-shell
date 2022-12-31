@@ -1,6 +1,6 @@
 COMPONENT=frontend
 CONTENT="*"
-source common.sh
+source Common.sh
 
 PRINT "Install Nginx"
 yum install nginx -y &>>$LOG
