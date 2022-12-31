@@ -1,6 +1,6 @@
 COMPONENT=frontend
 CONTENT="*"
-source Common.sh
+source common.sh
 
 PRINT "Install Nginx"
 yum install nginx -y &>>$LOG
@@ -8,19 +8,22 @@ STAT $?
 
 APP_LOC=/usr/share/nginx/html
 
-DOWNLOAD_APP_CODE #DOWNLOADING APP CODE IS GOING TO THE LOCATON AND DOWNLOADING ALL THE CODE , REMOVING PREVIOUS STUFF AND AGAIN DOING UNZIP
+DOWNLOAD_APP_CODE
 
 mv frontend-main/static/* .
 
-PRINT "COPY CONFIGURATION FILE"
-mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf &>>$LOG
+PRINT "Copy RoboShop Configuration File"
+mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf
+STAT $?
 
-PRINT "Update roboshop configuration"
+PRINT "Update RoboShop Configuration"
 sed -i -e '/catalogue/ s/localhost/dev-catalogue.devopsb69.online/'  -e '/user/ s/localhost/dev-user.devopsb69.online/' -e '/cart/ s/localhost/dev-cart.devopsb69.online/' -e '/shipping/ s/localhost/dev-shipping.devopsb69.online/' -e '/payment/ s/localhost/dev-payment.devopsb69.online/' /etc/nginx/default.d/roboshop.conf
 STAT $?
 
-PRINT "Enable Service nginx"
+PRINT "Enable Nginx Service"
 systemctl enable nginx &>>$LOG
+STAT $?
 
-PRINT "Restart service nginx"
+PRINT "Start Nginx Service"
 systemctl restart nginx &>>$LOG
+STAT $?
