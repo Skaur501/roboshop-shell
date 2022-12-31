@@ -16,7 +16,7 @@ PRINT "COPY CONFIGURATION FILE"
 mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf &>>$LOG
 
 PRINT "Update roboshop configuration"
-sed -i -e '/catalogue/ s/localhost/dev-catalogue.devops69.online/' -e '/catalogue/ s/localhost/dev-frontend.devops69.online/' -e '/catalogue/ s/localhost/dev-redis.devops69.online/' -e '/catalogue/ s/localhost/dev-user.devops69.online/' -e '/catalogue/ s/localhost/dev-shippinh.devops69.online/'
+sed -i -e '/catalogue/ s/localhost/dev-catalogue.devops69.online/' -e '/catalogue/ s/localhost/dev-frontend.devops69.online/' -e '/catalogue/ s/localhost/dev-redis.devops69.online/' -e '/catalogue/ s/localhost/dev-user.devops69.online/' -e '/catalogue/ s/localhost/dev-shippinh.devops69.online/' /etc/nginx/default.d/roboshop.conf
 
 PRINT "Enable Service nginx"
 systemctl enable nginx &>>$LOG
