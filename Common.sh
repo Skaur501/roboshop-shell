@@ -140,9 +140,14 @@ GOLANG () {
     mv ${COMPONENT}-main ${COMPONENT}
     cd ${COMPONENT}
 
-    $ go mod init dispatch
-    $ go get
-    $ go build
+    PRINT "initilize diaptch mod"
+    $ go mod init dispatch &>>$LOG
+
+    PRINT "get mod"
+    $ go get &>>$LOG
+
+    PRINT "go and get build"
+    $ go build &>>$LOG
 
     SYSTEMD_SETUP
 }
