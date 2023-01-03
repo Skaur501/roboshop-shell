@@ -126,5 +126,26 @@ PYTHON() {
 
 }
 
+GOLANG () {
+   APP_LOC=/home/roboshop
+   CONTENT=$COMPONENT
+   APP_USER=roboshop
+
+    PRINT "Install GOLANG"
+    yum install golang -y &>>$LOG
+    STAT $?
+
+    DOWNLOAD_APP_CODE
+
+    mv ${COMPONENT}-main ${COMPONENT}
+    cd ${COMPONENT}
+
+    $ go mod init dispatch
+    $ go get
+    $ go build
+
+    SYSTEMD_SETUP
+}
+
 
 
