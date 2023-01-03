@@ -43,7 +43,7 @@ DOWNLOAD_APP_CODE() {
 
 SYSTEMD_SETUP() {
   PRINT "Configure Endpoints for SystemD Configuration"
-  sed -i -e 's/MONGO_DNSNAME/dev-mongodb.sarbjeet310.online/' -e 's/REDIS_ENDPOINT/dev-redis.sarbjeet310.online/' -e 's/CATALOGUE_ENDPOINT/dev-catalogue.sarbjeet310.online.online/' -e 's/MONGO_ENDPOINT/dev-mongodb.sarbjeet310.online.online/' -e 's/CARTENDPOINT/dev-cart.sarbjeet310.online/' -e 's/DBHOST/dev-mysql.sarbjeet310.online/' -e 's/AMQPHOST/dev-rabbitmq.sarbjeet310.online/' -e 's/CARTHOST/dev-cart.sarbjeet310.online/' -e 's/USERHOST/dev-user.sarbjeet310.online/' /home/roboshop/${COMPONENT}/systemd.service &>>$LOG
+  sed -i -e 's/MONGO_DNSNAME/dev-mongodb.sarbjeet310.online/' -e 's/REDIS_ENDPOINT/dev-redis.sarbjeet310.online/' -e 's/CATALOGUE_ENDPOINT/dev-catalogue.sarbjeet310.online/' -e 's/MONGO_ENDPOINT/dev-mongodb.sarbjeet310.online/' -e 's/CARTENDPOINT/dev-cart.sarbjeet310.online/' -e 's/DBHOST/dev-mysql.sarbjeet310.online/' -e 's/AMQPHOST/dev-rabbitmq.sarbjeet310.online/' -e 's/CARTHOST/dev-cart.sarbjeet310.online/' -e 's/USERHOST/dev-user.sarbjeet310.online/' /home/roboshop/${COMPONENT}/systemd.service &>>$LOG
   mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service
   STAT $?
 
