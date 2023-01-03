@@ -9,18 +9,6 @@ source Common.sh
 ROBOSHOP_MYSQL_PASSWORD=$1
 
 #this stat function will check if $1 is equal to 1 then its true otherwise its false. $1 means first argument
-STAT() {
-  if [ $1 -eq 0 ]; then
-    echo SUCCESS
-else
-    echo FAILURE
-    exit
- fi
-}
-
-PRINT() {
-  echo -e "\e[32m$1\e[0m"
-}
 
 PRINT "Downloading MYSQL Repo File"
 curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo &>>$LOG
