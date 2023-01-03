@@ -31,8 +31,8 @@ PRINT "reStart Rabbitmq"
 systemctl restart rabbitmq-server &>>$LOG
 STAT $?
 
-PRINT "Add application user"
-rabbitmqctl add_user roboshop ${RABBITMQ_APP_USER_PASSWORD} &>>$LOG
+PRINT "Add Application User"
+rabbitmqctl add_user roboshop ${RABBITMQ_APP_USER_PASSWORD}  &>>$LOG
 STAT $?
 
 PRINT "CONFIGURE APPLICATION USER TAG"
