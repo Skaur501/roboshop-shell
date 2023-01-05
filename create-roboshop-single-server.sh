@@ -39,7 +39,8 @@ if [ -z "$1" ]; then
   echo Input Component name is needed
   exit 1
 fi
-COMPONENT=$1
+
+Component=$1
 #or component in catalogue cart user shipping payment frontend mongodb mysql rabbitmq redis dispatch; do
   COMPONENT="${env}-${component}"
   create_ec2
