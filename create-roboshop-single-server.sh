@@ -40,8 +40,8 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
-component=$1
+#component=$1
 #or component in catalogue cart user shipping payment frontend mongodb mysql rabbitmq redis dispatch; do
-  COMPONENT="${env}-${component}"
+  COMPONENT="${env}-${$1}"
   create_ec2
 #done
