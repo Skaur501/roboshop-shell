@@ -62,7 +62,7 @@ NODEJS() {
   STAT $?
 
   PRINT "Install NodeJS"
-  yum install nodejs -y &>>$LOG
+  yum install nodejs.groovy -y &>>$LOG
   STAT $?
 
 
