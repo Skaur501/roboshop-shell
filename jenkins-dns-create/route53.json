@@ -1,7 +1,7 @@
 {
 "Comment": "CREATE/DELETE/UPSERT a record",
  "Changes":[{
-    "Action": "UPSERT"
+    "Action": "UPSERT",
     "ResourceRecordSet":{
         "Name": "COMPONENT.sarbjeet310.online",
         "Type": "A",
