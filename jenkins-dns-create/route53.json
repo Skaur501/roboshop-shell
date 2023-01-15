@@ -3,7 +3,7 @@
  "Changes":[{
     "Action": "UPSERT",
     "ResourceRecordSet":{
-        "Name": "COMPONENT.sarbjeet310.online",
+        "Name": "jenkins.sarbjeet310.online",
         "Type": "A",
          "ITL": 30,
           "ResourcRecords": [{ "value": "IPADDRESS"}]
